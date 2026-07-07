@@ -1,0 +1,27 @@
+# Project ignores
+
+# Runtime/cache/logs
+*.log
+.cache/
+tmp/
+
+# App runtime artifacts
+/app/var/*
+!/app/var/*/
+!/app/var/*/.gitkeep
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Local configs
+.env.local
+.env.*.local
+
+# Dist
+/app/dist/*
+!/app/dist/*/
+!/app/dist/*/.gitkeep

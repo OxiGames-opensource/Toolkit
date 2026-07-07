@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "name": "example-plugin",
+  "button_label": "Example Plugin",
+  "button_style": ["btn-info"],
+  "icon": "icon.png",
+  "structure": {
+    "description": "Example Ops plugin structure."
+  }
+}
