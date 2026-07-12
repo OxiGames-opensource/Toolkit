@@ -1,9 +1,11 @@
 #include "Application/Bootstrap/Bootstrap.hpp"
 
+#include "Application/Bootstrap/Configuration/Configuration.hpp"
 #include "Application/Bootstrap/Environment/Environment.hpp"
 #include "Application/Bootstrap/StartupDiagnostics.hpp"
 #include "Application/Kernel/Kernel.hpp"
 
+#include <filesystem>
 #include <string>
 
 namespace OxiToolkit::Application::Bootstrap {
@@ -11,6 +13,22 @@ namespace OxiToolkit::Application::Bootstrap {
 int Bootstrap::run(const bool debug)
 {
     StartupDiagnostics diagnostics(debug);
+
+    Configuration::Configuration configuration(
+        debug,
+        std::filesystem::current_path()
+    );
+
+    diagnostics.info(
+        "OxiToolkit version: "
+        + std::string(Configuration::Configuration::version())
+    );
+
+    diagnostics.info(
+        "Working directory: "
+        + configuration.workingDirectory().string()
+    );
+
     Environment::Environment environment;
 
     const Environment::OperatingSystem operatingSystem =
@@ -18,7 +36,11 @@ int Bootstrap::run(const bool debug)
 
     diagnostics.info(
         "Operating system detected: "
-        + std::string(Environment::Environment::operatingSystemName(operatingSystem))
+        + std::string(
+            Environment::Environment::operatingSystemName(
+                operatingSystem
+            )
+        )
     );
 
     if (operatingSystem == Environment::OperatingSystem::Unknown) {
@@ -27,7 +49,7 @@ int Bootstrap::run(const bool debug)
         diagnostics.ok("Execution environment detected");
     }
 
-    Kernel::Kernel kernel(debug);
+    Kernel::Kernel kernel(configuration.isDebugEnabled());
 
     return kernel.run();
 }

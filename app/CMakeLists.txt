@@ -12,6 +12,7 @@ add_executable(oxitoolkit
     src/Application/Launcher/ArgumentParser.cpp
     src/Application/Bootstrap/Bootstrap.cpp
     src/Application/Bootstrap/StartupDiagnostics.cpp
+    src/Application/Bootstrap/Configuration/Configuration.cpp
     src/Application/Bootstrap/Environment/Environment.cpp
     src/Application/Kernel/Kernel.cpp
     src/Runtime/main/Runtime.cpp
